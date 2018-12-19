@@ -27,8 +27,10 @@ IB_DESIGNABLE
  let svgImageView = SVGImageView(contentsOfURL: url)
  *
  */
+
 - (instancetype)initWithContentsOfURL:(NSURL *)url;
 
+- (void)_cr_loadSVGFromURL:(NSURL *)url;
 
 /*!
  * @discussion The SVG paths the view should draw.
