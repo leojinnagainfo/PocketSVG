@@ -91,8 +91,8 @@ static NSString *_SVGFormatNumber(NSNumber *aNumber);
 
 svgParser::svgParser(NSString *aSource)
 {
-    NSCParameterAssert(aSource);
-    _source = aSource;
+//    NSCParameterAssert(aSource);
+    _source = aSource==nil? @"":aSource;
 }
 
 NSArray *svgParser::parse(NSMapTable ** const aoAttributes)
@@ -858,13 +858,13 @@ hexTriplet::hexTriplet(NSString *str)
     }
     
     if ([str hasPrefix:@"rgb("]) {
-		NSCParameterAssert([str hasSuffix:@")"]);
+//        NSCParameterAssert([str hasSuffix:@")"]);
 		NSArray<NSString*>* parts = [[str substringWithRange:(NSRange) { 4, str.length-5 }] componentsSeparatedByString:@","];
-		NSCParameterAssert([parts count] == 3);
+//        NSCParameterAssert([parts count] == 3);
 		str = [NSString stringWithFormat:@"#%02x%02x%02x", (unsigned int)parts[0].integerValue, (unsigned int)parts[1].integerValue, (unsigned int)parts[2].integerValue];
 	} else {
-		NSCParameterAssert([str hasPrefix:@"#"]);
-		NSCParameterAssert([str length] == 4 || [str length] == 7);
+//        NSCParameterAssert([str hasPrefix:@"#"]);
+//        NSCParameterAssert([str length] == 4 || [str length] == 7);
 		if([str length] == 4) {
 			str = [str mutableCopy];
 			[(NSMutableString *)str insertString:[str substringWithRange:(NSRange) { 3, 1 }]
