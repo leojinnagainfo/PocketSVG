@@ -98,7 +98,7 @@ svgParser::svgParser(NSString *aSource)
 NSArray *svgParser::parse(NSMapTable ** const aoAttributes)
 {
     _xmlReader = xmlReaderForDoc((xmlChar *)[_source UTF8String], NULL, NULL, 0);
-    NSCAssert(_xmlReader, @"Failed to create XML parser");
+//    NSCAssert(_xmlReader, @"Failed to create XML parser");
 
     if(aoAttributes)
         *aoAttributes = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory|NSMapTableObjectPointerPersonality
@@ -169,8 +169,8 @@ void svgParser::popGroup()
 
 CF_RETURNS_RETAINED CGPathRef svgParser::readPathTag()
 {
-    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "path") == 0,
-              @"Not on a <path>");
+//    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "path") == 0,
+//              @"Not on a <path>");
 
     xmlAutoFree char * const pathDef = (char *)xmlTextReaderGetAttribute(_xmlReader, (xmlChar*)"d");
     if(!pathDef)
@@ -186,8 +186,8 @@ CF_RETURNS_RETAINED CGPathRef svgParser::readPathTag()
 
 CF_RETURNS_RETAINED CGPathRef svgParser::readRectTag()
 {
-    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "rect") == 0,
-              @"Not on a <rect>");
+//    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "rect") == 0,
+//              @"Not on a <rect>");
 
     CGRect const rect = {
         readFloatAttribute(@"x"),     readFloatAttribute(@"y"),
@@ -234,15 +234,15 @@ CF_RETURNS_RETAINED CGMutablePathRef svgParser::_readPolylineTag()
 }
 CF_RETURNS_RETAINED CGPathRef svgParser::readPolylineTag()
 {
-    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "polyline") == 0,
-              @"Not on a <polyline>");
+//    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "polyline") == 0,
+//              @"Not on a <polyline>");
     return _readPolylineTag();
 }
 
 CF_RETURNS_RETAINED CGPathRef svgParser::readPolygonTag()
 {
-    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "polygon") == 0,
-              @"Not on a <polygon>");
+//    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "polygon") == 0,
+//              @"Not on a <polygon>");
     
     CGMutablePathRef path = _readPolylineTag();
     CGPathCloseSubpath(path);
@@ -251,8 +251,8 @@ CF_RETURNS_RETAINED CGPathRef svgParser::readPolygonTag()
 
 CF_RETURNS_RETAINED CGPathRef svgParser::readCircleTag()
 {
-    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "circle") == 0,
-              @"Not on a <circle>");
+//    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "circle") == 0,
+//              @"Not on a <circle>");
     CGPoint const center = {
         readFloatAttribute(@"cx"), readFloatAttribute(@"cy")
     };
@@ -264,8 +264,8 @@ CF_RETURNS_RETAINED CGPathRef svgParser::readCircleTag()
 
 CF_RETURNS_RETAINED CGPathRef svgParser::readEllipseTag()
 {
-    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "ellipse") == 0,
-              @"Not on a <ellipse>");
+//    NSCAssert(strcasecmp((char*)xmlTextReaderConstName(_xmlReader), "ellipse") == 0,
+//              @"Not on a <ellipse>");
     CGPoint const center = {
         readFloatAttribute(@"cx"), readFloatAttribute(@"cy")
     };
